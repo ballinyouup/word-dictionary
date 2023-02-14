@@ -1,11 +1,18 @@
 import type { AppProps } from 'next/app';
 import '../styles/globals.css';
 import Layout from '../components/Layout';
+import Head from 'next/head';
 
 export default function MyApp({ Component, pageProps }: AppProps) {
   return (
-    <Layout>
-      <Component {...pageProps} />
-    </Layout>
+    <>
+      <Head>
+        <title>Words!</title>
+        <link rel="icon" href="/icon.png" />
+      </Head>
+      <Layout>
+        <Component {...pageProps} />
+      </Layout>
+    </>
   );
 }
