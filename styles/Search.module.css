@@ -1,6 +1,7 @@
 .search {
   border-radius: 12px;
-  padding: 5px;
+  border: 1px solid gray;
+  padding: 8px;
   text-indent: 5px;
   font-size: medium;
   width: 280px;
@@ -9,9 +10,12 @@
     Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
 
+.search:focus {
+  outline: solid 1px rgb(128, 128, 128);
+}
+
 .searchIcon {
   width: 20px;
-  cursor: pointer;
 }
 
 .searchButton {
@@ -19,19 +23,17 @@
   align-items: center;
   justify-content: center;
   position: relative;
-  left: -40px;
-  width: 36px;
-  height: 28px;
-  border-radius: 10px;
+  left: -44px;
+  width: 40px;
+  height: 37px;
+  border-radius: 0px 8px 8px 0px;
   border: none;
-  background-color: rgba(129, 129, 129, 1);
+  background: none;
+  cursor: pointer;
 }
 
-.searchButton:hover {
-  background-color: rgba(158, 157, 157, 1);
-}
 .searchContainer {
-  height: 200px;
+  height: 100px;
   display: flex;
   align-items: center;
   justify-content: center;
