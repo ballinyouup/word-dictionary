@@ -15,10 +15,10 @@ const Word = () => {
         {data
           ? data.phonetics.map((phtc: Phonetics, index: number) => {
               return (
-                <>
-                  <span key={index}>{phtc.text}</span>
+                <div key={index}>
+                  <span>{phtc.text}</span>
                   <br />
-                </>
+                </div>
               );
             })
           : null}
