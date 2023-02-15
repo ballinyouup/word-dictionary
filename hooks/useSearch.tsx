@@ -1,7 +1,7 @@
 import { useRouter } from 'next/router';
 import { useCallback, useEffect, useState } from 'react';
 import words from 'words.json';
-import debounce from "lodash.debounce";
+import { debounce } from 'lodash';
 
 const useSearch = () => {
   //Creates new query state for search string.
