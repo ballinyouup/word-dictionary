@@ -8,6 +8,8 @@ const Home: NextPage = () => {
         Welcome to the Dictionary App!
         <br />
         Enter a word to search!
+        <br />
+        <img src="https://cdn-icons-png.flaticon.com/512/4072/4072217.png" />
       </h2>
     </div>
   );

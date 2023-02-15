@@ -35,7 +35,7 @@
 .searchContainer {
   height: 160px;
   display: flex;
-  align-items: flex-end;
+  align-items: center;
   justify-content: center;
 }
 
