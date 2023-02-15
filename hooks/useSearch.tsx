@@ -1,11 +1,13 @@
 import { useRouter } from 'next/router';
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import words from 'words.json';
+import debounce from "lodash.debounce";
 
 const useSearch = () => {
   //Creates new query state for search string.
   const [query, setQuery] = useState<string>('');
   const [matching, setMatching] = useState<string[]>([]);
+  let timeout;
   //Creates a new router from next's useRouter hook.
   const router = useRouter();
 
@@ -17,10 +19,12 @@ const useSearch = () => {
       const regex = new RegExp(`^${trimmedQuery}`, 'i');
       return regex.test(key);
     });
-
     setQuery(trimmedQuery);
-    setMatching(matchingWords);
+    timeout = setTimeout(() => {
+      setMatching(matchingWords);
+    }, 500);
   }
+  const debouncedChangeHandler = useCallback(debounce(handleInput, 300), []);
 
   useEffect(() => {
     console.log(matching);
@@ -48,24 +52,15 @@ const useSearch = () => {
     const matchesQuery = keys.some((key: string) => {
       return key === trimmedQuery;
     });
-
     if (matchesQuery) {
       router.push(`/${trimmedQuery}`);
-      setQuery('');
-    } else {
-      router.push(`/notfound`);
       setQuery('');
     }
   }
 
   function handleMatchingClick(result: string) {
-    if (result) {
-      router.push(`/${result}`);
-      setQuery('');
-    } else {
-      router.push(`/notfound`);
-      setQuery('');
-    }
+    router.push(`/${result}`);
+    setQuery('');
   }
 
   //Returns the objects below to be used in components.

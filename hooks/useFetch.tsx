@@ -30,9 +30,10 @@ const useFetch = () => {
       }
     } catch (error) {
       console.log(error);
+      router.push('/notfound');
     } finally {
       // set isLoading to false when the response is received.
-      setTimeout(() => setIsLoading(false), 2000); 
+      setTimeout(() => setIsLoading(false), 2000);
     }
   };
 
