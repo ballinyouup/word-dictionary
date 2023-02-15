@@ -1,18 +1,30 @@
 import { useRouter } from 'next/router';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import words from 'words.json';
 
 const useSearch = () => {
   //Creates new query state for search string.
   const [query, setQuery] = useState<string>('');
-
+  const [matching, setMatching] = useState<string[]>([]);
   //Creates a new router from next's useRouter hook.
   const router = useRouter();
 
   //Sets query to the value of the input.
   function handleInput(event: React.ChangeEvent<HTMLInputElement>) {
-    setQuery(event.target.value);
+    const trimmedQuery: string = event.target.value.trim();
+    const keys = Object.keys(words);
+    const matchingWords = keys.filter((key: string) => {
+      const regex = new RegExp(`^${trimmedQuery}`, 'i');
+      return regex.test(key);
+    });
+
+    setQuery(trimmedQuery);
+    setMatching(matchingWords);
   }
+
+  useEffect(() => {
+    console.log(matching);
+  }, [matching]);
 
   //Runs handleSearch on Enter
   function handleKeyDown(event: React.KeyboardEvent<HTMLInputElement>) {
@@ -46,6 +58,16 @@ const useSearch = () => {
     }
   }
 
+  function handleMatchingClick(result: string) {
+    if (result) {
+      router.push(`/${result}`);
+      setQuery('');
+    } else {
+      router.push(`/notfound`);
+      setQuery('');
+    }
+  }
+
   //Returns the objects below to be used in components.
   return {
     query,
@@ -53,6 +75,8 @@ const useSearch = () => {
     handleInput,
     handleKeyDown,
     handleClick,
+    matching,
+    handleMatchingClick,
   };
 };
 

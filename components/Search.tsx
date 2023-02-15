@@ -2,7 +2,14 @@ import { FC } from 'react';
 import useSearch from '../hooks/useSearch';
 import styles from '../styles/Search.module.css';
 const Search: FC = () => {
-  const { query, handleInput, handleKeyDown, handleClick } = useSearch();
+  const {
+    query,
+    handleInput,
+    handleKeyDown,
+    handleClick,
+    matching,
+    handleMatchingClick,
+  } = useSearch();
   return (
     <div className={styles.searchContainer}>
       <input
@@ -12,6 +19,19 @@ const Search: FC = () => {
         placeholder="Enter word for definition.."
         value={query}
       />
+      <div className={styles.resultContainer}>
+        {query != ''
+          ? matching.slice(0, 10).map((result: string, index: number) => (
+              <button
+                onClick={() => handleMatchingClick(result)}
+                className={styles.result}
+                key={index}
+              >
+                {result}
+              </button>
+            ))
+          : null}
+      </div>
       <button className={styles.searchButton} onClick={handleClick}>
         <img
           className={styles.searchIcon}

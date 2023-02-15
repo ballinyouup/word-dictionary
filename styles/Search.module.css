@@ -45,3 +45,28 @@
   flex-direction: column;
   align-items: center;
 }
+
+.resultContainer {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  top: 160px;
+  margin-right: 40px;
+  background-color: white;
+
+  width: 400px;
+  height: auto;
+}
+.result {
+  border-radius: 12px;
+  border: 1px solid gray;
+  padding: 12px 20px;
+  cursor: pointer;
+  font-size: large;
+  text-align: left;
+}
+
+.result:hover {
+  border-radius: 12px;
+  background-color: bisque;
+}

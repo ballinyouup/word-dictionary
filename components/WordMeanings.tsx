@@ -9,7 +9,7 @@ const WordPhonetics: FC = () => {
   const { addNewButtonState, buttonStates, toggleButtonState } =
     useButtonStates();
   return (
-    <p>
+    <div>
       {data
         ? data.meanings.map((meaning: Meanings, index: number) => {
             return (
@@ -47,7 +47,7 @@ const WordPhonetics: FC = () => {
             );
           })
         : null}
-    </p>
+    </div>
   );
 };
 
