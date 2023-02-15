@@ -34,7 +34,7 @@ const useSearch = () => {
     const trimmedQuery: string = query.trim();
     const keys = Object.keys(words);
     const matchesQuery = keys.some((key: string) => {
-      return key.includes(trimmedQuery);
+      return key === trimmedQuery;
     });
 
     if (matchesQuery) {

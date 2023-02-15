@@ -2,6 +2,7 @@ import styles from '../styles/Word.module.css';
 import useFetch from '../hooks/useFetch';
 import WordPhonetics from '../components/WordPhonetics';
 import WordMeanings from '../components/WordMeanings';
+import LoadingWord from '../components/LoadingWord';
 
 const Word = () => {
   const { word, isLoading } = useFetch();
@@ -9,7 +10,7 @@ const Word = () => {
   return (
     <div className={styles.content}>
       {isLoading ? (
-        <div> loading.. </div>
+        <LoadingWord />
       ) : (
         <>
           <h1 className={styles.word}>{word}</h1>
