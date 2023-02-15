@@ -2,10 +2,22 @@ import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { IData } from '../types/FetchTypes';
 import { useRouter } from 'next/router';
+
 const useFetch = () => {
+  //Creates data variable of Interface IData or null and is set a default state of null.
   const [data, setData] = useState<IData | null>(null);
+
+  //Store return from next's useRouter hook inside router.
   const router = useRouter();
+
+  //Destructures object from router.query.
   const { word } = router.query;
+
+  /*
+  Fetches data with useEffect hook asynchronously with a try catch for errors and
+  runs whenever word changes as a dependency array.
+  Returns the data object and word.
+  */
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -19,7 +31,6 @@ const useFetch = () => {
         console.log(error);
       }
     };
-
     fetchData();
   }, [word]);
   return {data, word};
