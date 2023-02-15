@@ -10,30 +10,36 @@ const useFetch = () => {
   //Store return from next's useRouter hook inside router.
   const router = useRouter();
 
-  //Destructures object from router.query.
+  //Destructures page object from router.query.
   const { word } = router.query;
 
+  const [isLoading, setIsLoading] = useState<boolean>(false);
   /*
   Fetches data with useEffect hook asynchronously with a try catch for errors and
   runs whenever word changes as a dependency array.
   Returns the data object and word.
   */
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        if (word !== '') {
-          const response = await axios.get(
-            `https://api.dictionaryapi.dev/api/v2/entries/en/${word}`
-          );
-          setData(response.data[0]);
-        }
-      } catch (error) {
-        console.log(error);
+  const fetchData = async () => {
+    try {
+      if (word !== '') {
+        setIsLoading(true); // set isLoading to true when the request is sent
+        const response = await axios.get(
+          `https://api.dictionaryapi.dev/api/v2/entries/en/${word}`
+        );
+        setData(response.data[0]);
       }
-    };
+    } catch (error) {
+      console.log(error);
+    } finally {
+      // set isLoading to false when the response is received.
+      setTimeout(() => setIsLoading(false), 2000); 
+    }
+  };
+
+  useEffect(() => {
     fetchData();
   }, [word]);
-  return {data, word};
+  return { data, word, isLoading };
 };
 
 export default useFetch;
